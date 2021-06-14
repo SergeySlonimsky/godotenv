@@ -180,6 +180,14 @@ func Marshal(envMap map[string]string) (string, error) {
 	return strings.Join(lines, "\n"), nil
 }
 
+// Get returns the env variable by key if it exists and is not an empty string, otherwise it returns a fallback string
+func Get(key string, fallback string) string {
+	if val := os.Getenv(key); val != "" {
+		return val
+	}
+	return fallback
+}
+
 func filenamesOrDefault(filenames []string) []string {
 	if len(filenames) == 0 {
 		return []string{".env"}
